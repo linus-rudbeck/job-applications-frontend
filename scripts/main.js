@@ -103,10 +103,22 @@ const AUTH = {
     async showUserInfo() {
         try {
             const userInfo = await API.getUserInfo();
-            document.body.innerHTML += `<p>
-            Logged in as ${userInfo.email}
-            <button onclick="AUTH.logout()">Log out</button>
-            </p>`;
+
+
+            // --> START
+            // istället för document.body.innerHTML += `<p>...</p>`;
+            const p = document.createElement("p");
+            p.textContent = `Logged in as ${userInfo.email}`;
+
+            const button = document.createElement("button");
+            button.textContent = "Log out";
+            button.onclick = AUTH.logout;
+
+            p.appendChild(button);
+            document.body.appendChild(p);
+            // END <--
+
+
 
             const loginLink = document.getElementById("login-link");
 
